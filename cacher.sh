@@ -9,7 +9,7 @@ fi
 if [[ $DRONE_COMMIT_MESSAGE == *"[CLEAR CACHE]"* && -n "$PLUGIN_RESTORE" && "$PLUGIN_RESTORE" == "true" ]]; then
     if [ -d "/cache/$DRONE_REPO_OWNER/$DRONE_REPO_NAME" ]; then
         echo "Found [CLEAR CACHE] in commit message, clearing cache..."
-        rm -rf "/cache/$DRONE_REPO_OWNER/$DRONE_REPO_NAME/$DRONE_JOB_NUMBER"
+        rm -rf "/cache/$DRONE_REPO_OWNER/$PLUGIN_REPO_NAME"
         exit 0
     fi
 fi
@@ -19,7 +19,7 @@ if [[ $DRONE_COMMIT_MESSAGE == *"[NO CACHE]"* ]]; then
     exit 0
 fi
 
-CACHE_PATH="$DRONE_REPO_OWNER/$DRONE_REPO_NAME/$DRONE_JOB_NUMBER"
+CACHE_PATH="$DRONE_REPO_OWNER/$PLUGIN_REPO_NAME"
 if [[ -n "$PLUGIN_CACHE_KEY" ]]; then
     function join_by { local IFS="$1"; shift; echo "$*"; }
     IFS=','; read -ra CACHE_PATH_VARS <<< "$PLUGIN_CACHE_KEY"
