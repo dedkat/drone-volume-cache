@@ -7,7 +7,7 @@ if [ -z "$PLUGIN_MOUNT" ]; then
 fi
 
 if [[ $DRONE_COMMIT_MESSAGE == *"[CLEAR CACHE]"* && -n "$PLUGIN_RESTORE" && "$PLUGIN_RESTORE" == "true" ]]; then
-    if [ -d "/cache/$DRONE_REPO_OWNER/$DRONE_REPO_NAME" ]; then
+    if [ -d "/cache/$DRONE_REPO_OWNER/$PLUGIN_REPO_NAME" ]; then
         echo "Found [CLEAR CACHE] in commit message, clearing cache..."
         rm -rf "/cache/$DRONE_REPO_OWNER/$PLUGIN_REPO_NAME"
         exit 0
